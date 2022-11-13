@@ -4,8 +4,9 @@ namespace App\Http\QueryBuilders;
 
 use Exception;
 
-class EmployeeQueryBuilder
+class TicketsQueryBuilder
 {
+
     /** @var DatabaseConnection $dbConnection */
     private $dbConnection;
 
@@ -18,48 +19,48 @@ class EmployeeQueryBuilder
     }
 
     /**
-     * Select employees.
+     * Select tickets.
      *
      * @return array
      * @throws Exception
      */
-    public function selectEmployees(): array
+    public function selectTickets(): array
     {
-        $sql = "SELECT * FROM Employees";
+        $sql = "SELECT * FROM Tickets";
 
         $result = $this->dbConnection->query($sql);
 
-        $employees = [];
+        $tickets = [];
 
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            $employees[] = [
+            $tickets[] = [
                 'id' => $row['id'],
-                'name' => $row['name'],
-                'email' => $row['email'],
-                'age' => $row['age'],
-                'designation' => $row['designation'],
+                'type' => $row['type'],
+                'price' => $row['price'],
+                'sale_date' => $row['sale_date'],
+                'sales' => $row['sales'],
                 'created' => $row['created']
             ];
         }
 
         if ($this->dbConnection->query($sql)) {
-            return $employees;
+            return $tickets;
         } else {
             throw new Exception("ERROR: Could not able to execute $sql. " . mysqli_error($this->dbConnection));
         }
     }
 
     /**
-     * Select employee by id.
+     * Select ticket by id.
      *
      * @param $id
      * @return array
      * @throws Exception
      */
-    public function selectEmployee($id): array
+    public function selectTicket($id): array
     {
-        $sql = "SELECT * FROM Employees WHERE id = {$id}";
+        $sql = "SELECT * FROM Tickets WHERE id = {$id}";
 
         if ($this->dbConnection->query($sql)) {
             return $this->dbConnection->query($sql)->fetch_assoc();
@@ -69,80 +70,83 @@ class EmployeeQueryBuilder
     }
 
     /**
-     * Insert new employee.
+     * Insert new ticket.
      *
-     * @param $newEmployee
+     * @param $newTicket
      * @return array|false|null
      * @throws Exception
      */
-    public function insertEmployee($newEmployee)
+    public function insertTicket($newTicket)
     {
         [
-            'name' => $name,
-            'age' => $age,
-            'designation' => $designation,
+            'type' => $type,
+            'price' => $price,
+            'sale_date' => $sale_date,
+            'sales' => $sales,
             'created' => $created
-        ] = $newEmployee;
+        ] = $newTicket;
 
-        $sql = "INSERT INTO Employees (name, age, designation, created) VALUES ('$name', '$age', '$designation', '$created')";
+        $sql = "INSERT INTO Tickets (type, price, sale_date, sales, created) VALUES ('$type', '$price', '$sale_date', '$sales', '$created')";
 
         if ($this->dbConnection->query($sql)) {
-            $createdEmployeeId = $this->dbConnection->insert_id;
-            $createdEmployeeSql = "SELECT * FROM Employees WHERE id = {$createdEmployeeId}";
+            $createdTicketId = $this->dbConnection->insert_id;
+            $createdTicketSql = "SELECT * FROM Tickets WHERE id = {$createdTicketId}";
 
-            return $this->dbConnection->query($createdEmployeeSql)->fetch_assoc();
+            return $this->dbConnection->query($createdTicketSql)->fetch_assoc();
         } else {
             throw new Exception("ERROR: Could not able to execute $sql. " . mysqli_error($this->dbConnection));
         }
     }
 
     /**
-     * Update employee.
+     * Update Ticket.
      *
      * @param $id
      * @param $parameters
      * @return array|false|null
      * @throws Exception
      */
-    public function updateEmployee($id, $parameters)
+    public function updateTicket($id, $parameters)
     {
         [
-            'name' => $name,
-            'age' => $age,
-            'designation' => $designation,
+            'type' => $type,
+            'price' => $price,
+            'sale_date' => $sale_date,
+            'sales' => $sales,
             'created' => $created
         ] = $parameters;
 
-        $sql = "UPDATE Employees SET name='$name', age='$age', designation='$designation', created='$created' WHERE id='$id'";
+        $sql = "UPDATE Tickets SET type='$type', price='$price', sale_date='$sale_date', sales= '$sales', created='$created' WHERE id='$id'";
         $this->dbConnection->query($sql);
 
         if ($this->dbConnection->query($sql)) {
-            $updatedEmployeeSql = "SELECT * FROM Employees WHERE id = {$id}";
+            $updatedTicketSql = "SELECT * FROM Tickets WHERE id = {$id}";
 
-            return $this->dbConnection->query($updatedEmployeeSql)->fetch_assoc();
+            return $this->dbConnection->query($updatedTicketSql)->fetch_assoc();
         } else {
             throw new Exception("ERROR: Could not able to execute $sql. " . mysqli_error($this->dbConnection));
         }
     }
 
     /**
-     * Delete employee.
+     * Delete ticket.
      *
      * @param $id
      * @return string
      * @throws Exception
      */
-    public function deleteEmployee($id)
+    public function deleteTicket($id)
     {
-        $sql = "DELETE FROM Employees WHERE id = {$id}";
+        $sql = "DELETE FROM Tickets WHERE id = {$id}";
 
         $this->dbConnection->query($sql);
 
         if ($this->dbConnection->query($sql)) {
 
-            return "Employee has been deleted.";
+            return "Ticket has been deleted.";
         } else {
             throw new Exception("ERROR: Could not able to execute $sql. " . mysqli_error($this->dbConnection));
         }
     }
+
 }

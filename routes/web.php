@@ -25,12 +25,12 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->put('employee/{id}', 'EmployeesApiController@updateEmployee');
     $router->delete('employee/{id}', 'EmployeesApiController@deleteEmployee');
 
-    //    Tickets API
-//    $router->get('tickets', 'TicketsApiController@getTickets');
-//    $router->post('tickets', 'TicketsApiController@createTickets');
-//    $router->get('tickets/{id}', 'TicketsApiController@getTickets');
-//    $router->put('tickets/{id}','TicketsApiController@updateTickets');
-//    $router->delete('tickets/{id}','TicketsApiController@deleteTickets');
+    //Tickets API
+    $router->get('tickets', 'TicketsApiController@getTickets');
+    $router->post('ticket', 'TicketsApiController@createTicket');
+    $router->get('ticket/{id}', 'TicketsApiController@getTicket');
+    $router->put('ticket/{id}','TicketsApiController@updateTicket');
+    $router->delete('ticket/{id}','TicketsApiController@deleteTicket');
 
     //    Brands API
 //    $router->get('brands', 'BrandsApiController@getBrands');
