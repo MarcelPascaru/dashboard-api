@@ -79,12 +79,13 @@ class EmployeeQueryBuilder
     {
         [
             'name' => $name,
+            'email' => $email,
             'age' => $age,
             'designation' => $designation,
             'created' => $created
         ] = $newEmployee;
 
-        $sql = "INSERT INTO Employees (name, age, designation, created) VALUES ('$name', '$age', '$designation', '$created')";
+        $sql = "INSERT INTO Employees (name, email, age, designation, created) VALUES ('$name','$email', '$age', '$designation', '$created')";
 
         if ($this->dbConnection->query($sql)) {
             $createdEmployeeId = $this->dbConnection->insert_id;
