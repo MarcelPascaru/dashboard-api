@@ -33,11 +33,11 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->delete('ticket/{id}','TicketsApiController@deleteTicket');
 
     //    Brands API
-//    $router->get('brands', 'BrandsApiController@getBrands');
-//    $router->post('brands','BrandsApiController@createBrands');
-//    $router->get('brands/{id}','BrandsApiController@getBrands');
-//    $router->put('brands/{id}','BrandsApiController@updateBrands');
-//    $router->delete('brands/{id}','BrandsApiController@deleteBrands');
+    $router->get('brands', 'BrandsApiController@getBrands');
+    $router->post('brand','BrandsApiController@createBrand');
+    $router->get('brand/{id}','BrandsApiController@getBrand');
+    $router->put('brand/{id}','BrandsApiController@updateBrand');
+    $router->delete('brand/{id}','BrandsApiController@deleteBrand');
 
     //    Sponsors API
 //    $router->get('sponsors','SponsorsApiController@getSponsors');
