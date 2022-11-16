@@ -40,11 +40,11 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->delete('brand/{id}','BrandsApiController@deleteBrand');
 
     //    Sponsors API
-//    $router->get('sponsors','SponsorsApiController@getSponsors');
-//    $router->post('sponsors','SponsorsApiController@createSponsors');
-//    $router->get('sponsors/{id}','SponsorsApiController@getSponsors');
-//    $router->put('sponsors/{id}','SponsorsApiController@updateSponsors');
-//    $router->delete('sponsors/{id}','SponsorsApiController@deleteSponsors');
+    $router->get('sponsors','SponsorsApiController@getSponsors');
+    $router->post('sponsor','SponsorsApiController@createSponsor');
+    $router->get('sponsor/{id}','SponsorsApiController@getSponsor');
+    $router->put('sponsor/{id}','SponsorsApiController@updateSponsor');
+    $router->delete('sponsor/{id}','SponsorsApiController@deleteSponsor');
 
     //    Maintenance
 //    $router->get('maintenance','MaintenanceApiController@getMaintenance');
